@@ -1,0 +1,13 @@
+{
+  "archive": "CoSER-source.zip",
+  "sha256": "6a4a987e66bd813f133ee88207402949f6f1c7642a884fa7c4a1b39a416925f1",
+  "archive_bytes": 21732155,
+  "members": 6840,
+  "source_bindings": 6908,
+  "compiler_manifests": 75,
+  "compiler_non_system_bindings": 10096,
+  "missing_compiler_dependencies": 0,
+  "static_secret_findings": 0,
+  "private_or_cloud_experiments_executed": false,
+  "clean_machine_native_rebuild": false
+}
