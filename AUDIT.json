@@ -1,13 +1,24 @@
 {
   "archive": "CoSER-source.zip",
-  "sha256": "6a4a987e66bd813f133ee88207402949f6f1c7642a884fa7c4a1b39a416925f1",
-  "archive_bytes": 21732155,
-  "members": 6840,
-  "source_bindings": 6908,
+  "sha256": "95dfcc87d40b409d80349d97f798a855cd22d988df48b765c69e014804f7a767",
+  "archive_bytes": 22778716,
+  "members": 7382,
+  "source_bindings": 7440,
   "compiler_manifests": 75,
   "compiler_non_system_bindings": 10096,
   "missing_compiler_dependencies": 0,
   "static_secret_findings": 0,
+  "clean_empty_directory_native_build_targets": [
+    "gpt2_wan",
+    "gpt2_shared_host",
+    "bert_base_wan",
+    "bert_large_entry"
+  ],
+  "public_native_cases": 4,
+  "public_integer_words": 11645888,
+  "public_arithmetic": "PASS",
   "private_or_cloud_experiments_executed": false,
-  "clean_machine_native_rebuild": false
+  "external_frameworks_rebuilt": false,
+  "temporary_native_builds_removed": true,
+  "reproduction_logs_sha256": "73288410a3c67dc36e541bd458e49005cf9cfb22b88d1a22d90f0b0d3dafd107"
 }

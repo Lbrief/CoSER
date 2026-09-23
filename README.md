@@ -15,7 +15,17 @@ python3 tools/verify.py
 python3 tools/summarize_results.py --output output/measurements.json
 ```
 
-The first command verifies release files and their original source hashes. The second recomputes the archived retrieval and ablation summaries; it does not start a cryptographic inference experiment.
+The verification command checks release files and their original source hashes. The summary command recomputes the archived retrieval and ablation tables.
+
+For the executable reproduction route, follow the Ubuntu setup in **[REPRODUCING.md](REPRODUCING.md)**, then run:
+
+```sh
+python3 tools/check_environment.py
+python3 tools/build_native.py --work "$HOME/coser-build" --jobs 2 --target all
+python3 tools/test_native.py --work "$HOME/coser-build" --output "$HOME/coser-build/public"
+```
+
+This builds four CoSER native entries from source and runs a two-party public correctness suite against the freshly built libraries. Build commands and diagnostics are saved automatically. Trained-model and external-framework reproduction are separate sections of the guide.
 
 ## What is included
 
@@ -29,7 +39,7 @@ The first command verifies release files and their original source hashes. The s
 | `third_party/` | Collected upstream source, including SEAL, HEXL, EMP, and BumbleBee |
 | `support/` | Materialized dependency sources retained from the recorded builds |
 | `provenance/` | Source hashes, compiler dependency records, build commands, and paper-to-experiment bindings |
-| `tools/` | Release verification, public asset acquisition, source materialization, and recipe inspection |
+| `tools/` | Environment checks, native builds, two-party public checks, asset acquisition and archive verification |
 
 The release uses descriptive file names. `provenance/source-map.json` maps them back to the exact experiment sources and SHA-256 hashes. Experimental identifiers in that manifest are provenance, not additional result claims. Source contents are preserved rather than silently rewriting mathematical code during packaging.
 
@@ -47,7 +57,7 @@ The final GPT-2 WAN observation is **1857.466667696 seconds**, compared with the
 
 ## Verification status
 
-The packaging audit checks collected source hashes, recorded non-system compiler dependencies, direct local Python imports, archive contents, and the archived statistical calculations. No private experiment or cloud benchmark was rerun during packaging. Build configuration and execution steps are described in `REPRODUCING.md`.
+The local reproduction record in **[LOCAL_REPRODUCTION.md](LOCAL_REPRODUCTION.md)** lists the native entries built from source and the public checks actually executed. Source hashes, compiler dependencies, archive contents and table calculations are checked separately. This packaging verification does not rerun private experiments or cloud benchmarks.
 
 ## Licenses
 

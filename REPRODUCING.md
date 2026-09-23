@@ -1,35 +1,64 @@
 # Reproduction workflow
 
-## 1. Verify the release and recover the build layout
+## 1. Install the build environment
 
-Use Python 3.10 or newer for the release tools. Native experiments require Linux x86-64 (the recorded client used WSL Ubuntu), a C++17 compiler with the recorded AES/AVX2/PCLMUL flags, CMake, OpenMP, OpenSSL, GMP, and the pinned HE/MPC dependencies. GPU acceleration is not assumed.
+The executable build route below targets **Ubuntu 24.04 x86-64, GCC 13 and Python 3.12**, including Ubuntu under WSL 2. AES, AVX2 and PCLMUL CPU instructions are required. Run inside the Linux filesystem rather than a Windows-mounted directory. Use a path without spaces. No GPU is required.
 
 ```sh
+sudo apt-get update
+sudo apt-get install -y build-essential gcc-13 g++-13 cmake ninja-build \
+  pkg-config libssl-dev libgmp-dev python3 python3-venv unzip
+unzip CoSER-source.zip
+cd CoSER
 python3 tools/verify.py
-python3 tools/materialize.py --output /absolute/new/path/coser-build
-python3 tools/recipes.py
-python3 tools/recipes.py gpt2_wan --materialized /absolute/new/path/coser-build
+python3 tools/check_environment.py
 ```
 
-`materialize.py` creates a fresh tree and refuses overwrites. It restores the original file names and include/import relationships **only inside that generated build tree**, rebasing `/mnt/c`, `/mnt/d`, `/home`, and `/data` into the chosen output directory. The published files retain concise names. `PATHS.json` identifies the materialized path for each published source.
+The check stops with a list of missing requirements. The supplied CPU Features, HEXL and SEAL sources are built locally; this route does not download or reuse historical binaries. Allow 8 GiB RAM and at least 4 GiB free space for the source and temporary builds. The complete trained-model workloads have larger memory and data requirements described below.
 
-This step does not compile, contact a server, create shares, start a benchmark, or bypass an admission check. Files recovered from an archive without a recorded original host location remain in the named source tree; the tool does not guess their original location.
+## 2. Build and run public correctness checks
 
-## 2. Build the native dependencies and executable
+Choose a fresh, absolute work path. This example keeps every generated object, library and restored source under one directory:
 
-The recorded compiler invocations, object dependencies, archive commands, link commands and source pins are in `provenance/build/` and `provenance/dependencies/`. Inspect the appropriate group with `tools/recipes.py`. Its output is a command listing, not a topologically ordered shell script; do not pipe it directly into a shell.
+```sh
+export COSER_WORK="$HOME/coser-build"
+python3 tools/build_native.py --work "$COSER_WORK" --jobs 2 --target all
+python3 tools/test_native.py --work "$COSER_WORK" --output "$COSER_WORK/public"
+python3 tools/summarize_results.py --output "$COSER_WORK/measurements.json"
+```
 
-The build order is:
+`build_native.py` builds CPU Features, HEXL, SEAL, EMP, the appropriate OT backends and SCI libraries, followed by these four recorded CoSER entries:
 
-1. Build CPU Features and Intel HEXL from their supplied sources, then SEAL using the recorded configuration and generated headers. Keep the recorded polynomial degree, coefficient primes and security settings.
-2. Build the EMP support and the selected OT backend. The final GPT-2 backend includes the batched Boolean-wire implementation. The obsolete unbatched backend must not replace it.
-3. Compile the recorded SCI support objects and archive them into the FloatingPoint, BuildingBlocks, Math, GC, LinearOT and OT libraries.
-4. Compile the selected model entry and link against those libraries and the selected backend. The BERT-large library closure and GPT-2 shared-host/WAN entries are distinct build groups.
-5. Resolve system-library locations for the new machine. Paths to `/usr/lib` in a historical command are records of the original environment, not a promise that another distribution installs the library in the same place. Retain ABI-compatible dependencies and record new hashes.
+| Target | Executable |
+| --- | --- |
+| `gpt2_wan` | Final GPT-2 decoder used for the WAN implementation |
+| `gpt2_shared_host` | GPT-2 shared-host decoder |
+| `bert_base_wan` | BERT-base native model entry |
+| `bert_large_entry` | BERT-large native model entry and its separate library closure |
 
-For BumbleBee, the supplied upstream source is the recorded `47c5560d069543591f3b0176eb530ede28e33fc3` tree with its Bazel workspace files. Use the repository's installation instructions and the experiment adapter's runtime overlay. The original runtime used CPython 3.12, JAX 0.4.26 and Transformers 4.31 with its recorded native SPU/YACL build. Do not substitute an unrelated current SPU wheel. BOLT, Panther and Pisces also use the included experiment adapters; they are not interchangeable with a fresh checkout of an upstream default example.
+The default `all` builds all four. To build one entry, use its target name. Commands, compiler output and failed attempts stay in `logs/`. A successful build produces `BUILD_RESULT.json` with the executable paths and hashes. Existing successful steps are reusable within an unchanged build tree; use a new work directory after changing source code. Do not copy old experimental object files into the tree.
 
-The package preserves source and commands, not an already rebuilt container or binary toolchain. Third-party dependency downloads referenced by upstream build files may still be required.
+`test_native.py` compiles the production-consumer fixture against the newly built libraries. It runs two local parties for both protocol modes and both role mappings, using synthetic inputs and fresh randomness. The fixture exercises attention and reuses the same normalization, field, GELU and CRT-tail owners before and after attention. Each output is checked against an independent integer oracle. The final `public/RESULT.json` must say `PASS`; all party exit codes must be zero and all 144 test ports must be available again. These checks execute real native protocols. They do not load trained weights or produce a new model/WAN timing result.
+
+The default test port blocks begin at 22000, 22700, 23400 and 24100. If occupied, choose another base with `--base-port`; the entire range must stay below 32768. Tests refuse an existing output directory. A failed test leaves its logs and terminates its owned processes; retain those logs before creating a new output directory.
+
+To run the paper's public equation checks as well:
+
+```sh
+python3 -m venv "$COSER_WORK/venv"
+"$COSER_WORK/venv/bin/python" -m pip install -r requirements-public.txt
+"$COSER_WORK/venv/bin/python" tools/test_arithmetic.py --work "$COSER_WORK"
+```
+
+This verifies the arithmetic companion and compiles its small public C++ harness. It is separate from encrypted model inference.
+
+### How historical paths are restored
+
+The archive uses descriptive names. The builder calls `materialize.py` to restore recorded include/import names inside `COSER_WORK/materialized`. Absolute historical paths are rebased there in one pass, including nested paths. No original experiment directory is read or modified. `PATHS.json` maps published names to generated paths. The source map checks the original bytes before restoration. Recorded build recipes remain available through `tools/recipes.py`; its output is a listing, not a shell script.
+
+### External frameworks
+
+The four targets above are CoSER entries. BOLT, BumbleBee, Panther and Pisces are separate frameworks with their own native builds, Python environments and experiment adapters. Their collected source, Bazel/CMake metadata, dependency pins and licenses are included. Use the selected framework's recorded source tree and adapter from `EXPERIMENTS.md`; a current upstream wheel is not a substitute for a recorded modified native backend. The local build-check results identify exactly which entries were executed. They do not mark external-framework rebuilds as passed.
 
 ## 3. Prepare data and configure a new execution
 
