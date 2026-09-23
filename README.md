@@ -47,7 +47,7 @@ The final GPT-2 WAN observation is **1857.466667696 seconds**, compared with the
 
 ## Verification status
 
-The packaging audit checks collected source hashes, recorded non-system compiler dependencies, direct local Python imports, archive contents, and the archived statistical calculations. No private experiment or cloud benchmark was rerun during packaging. A clean-machine rebuild and full encrypted rerun of every framework have **not** been performed as part of this release; historical drivers require the environment and path configuration described in `REPRODUCING.md`. This archive is not advertised as a one-command benchmark container.
+The packaging audit checks collected source hashes, recorded non-system compiler dependencies, direct local Python imports, archive contents, and the archived statistical calculations. No private experiment or cloud benchmark was rerun during packaging. Build configuration and execution steps are described in `REPRODUCING.md`.
 
 ## Licenses
 

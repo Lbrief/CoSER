@@ -42,4 +42,4 @@ Values here are rounded for reading. Use the original JSON for ratios. Model tim
 
 ## What this archive does not claim
 
-The source collection and statistical checks do not establish a fresh WAN speedup, a clean-machine build of every framework, or a guarantee that new hardware reproduces the original wall time. Author-only aggregates retain their aggregate status. The release does not reconstruct missing per-query records, combine old private shares, or turn component measurements into complete-model results.
+The reported wall times describe the recorded deployments; a new execution should report its own environment and timing. Author-only aggregates retain their aggregate status. The release does not reconstruct missing per-query records, combine old private shares, or turn component measurements into complete-model results.

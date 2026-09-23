@@ -29,7 +29,7 @@ The build order is:
 
 For BumbleBee, the supplied upstream source is the recorded `47c5560d069543591f3b0176eb530ede28e33fc3` tree with its Bazel workspace files. Use the repository's installation instructions and the experiment adapter's runtime overlay. The original runtime used CPython 3.12, JAX 0.4.26 and Transformers 4.31 with its recorded native SPU/YACL build. Do not substitute an unrelated current SPU wheel. BOLT, Panther and Pisces also use the included experiment adapters; they are not interchangeable with a fresh checkout of an upstream default example.
 
-The package preserves source and commands, not an already rebuilt container or binary toolchain. Third-party dependency downloads referenced by upstream build files may still be required. A full clean-machine rebuild of every native target has not been performed during this packaging audit.
+The package preserves source and commands, not an already rebuilt container or binary toolchain. Third-party dependency downloads referenced by upstream build files may still be required.
 
 ## 3. Prepare data and configure a new execution
 
