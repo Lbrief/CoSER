@@ -18,8 +18,8 @@
       "sha256": "dc4370da766b8d3449f445f6b82f425f1c096dd57bcfe7cacdfa2c91f75f889c"
     },
     "README.md": {
-      "bytes": 16820,
-      "sha256": "d1312427c04481e21e7fe793a14ed2b2c1ecc7a5088a31d4b731fd1e15aa9957"
+      "bytes": 15939,
+      "sha256": "4ea5a1d5ce80655f0b4f730c26cdac9c3ae345eeab9aa9cd6f13e93e6c6fb470"
     },
     "REPRODUCING.md": {
       "bytes": 21154,
@@ -12270,12 +12270,12 @@
       "sha256": "9742f8b9672f8cd246774bb476e71547c506f376fc8bfa0f41afefca79bca885"
     },
     "coser-banner.gif": {
-      "bytes": 195904,
-      "sha256": "81a3de0bd320bc0030e235aca27b6284eae4875ea2b4212095da1fe3dc7e05d9"
+      "bytes": 1541841,
+      "sha256": "5c0f7efc32c222a5155d6b8a459d838e5c10418cd21c1cc6e03129d80ef01a9e"
     },
     "coser-banner.svg": {
-      "bytes": 28006,
-      "sha256": "3d902047942c581ab3e21e62d1c8a6c4fed3aef61451932f982354b68c532a3f"
+      "bytes": 96917,
+      "sha256": "2ff09a0933ac02f25a17cf00c156f64cec8653426c74ef5bac348f077c6e1dcd"
     },
     "data/fiqa/records/COMMON__COMPARISON.md": {
       "bytes": 4377,

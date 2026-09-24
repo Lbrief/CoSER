@@ -2,8 +2,8 @@
   "status": "PASS_LOCAL_RELEASE_AUDIT",
   "archives": {
     "CoSER-source.zip": {
-      "sha256": "3b3ad877b10238385c273d3db73155f18d22646f95c1b081cf93187c415d05bc",
-      "bytes": 22569638,
+      "sha256": "58a7dd54da64bffa72d382e4c366a93d3f704b2ad4c7772ec3e60c9e31e487ef",
+      "bytes": 23935323,
       "members": 6970
     },
     "CoSER-dependencies.zip": {
@@ -49,17 +49,16 @@
     "checks_reused_from_accepted_release": true
   },
   "homepage_update": {
-    "added_files": [
+    "added_files": [],
+    "changed_files": [
+      "README.md",
       "coser-banner.gif",
       "coser-banner.svg"
     ],
-    "changed_files": [
-      "README.md"
-    ],
-    "links_checked": 29,
+    "links_checked": 26,
     "existing_65_documented_commands_unchanged": true,
     "executable_source_unchanged": true,
     "new_native_or_model_execution": false,
-    "previous_commit": "aa9323d5e395e06e7aefcf69e2a1edd0b1460f6e"
+    "previous_commit": "4a4e16749845c6a65cb02156a4ba42b86c6eeff4"
   }
 }
