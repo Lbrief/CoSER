@@ -6,10 +6,11 @@ This repository preserves the implementations used for the reported results. The
 
 ## Get the code
 
-Download **[CoSER-source.zip](CoSER-source.zip)** and extract it. The archive contains the full named source tree and the tools described below. The accompanying `SHA256SUMS` identifies the archive. GitHub's automatic “Download ZIP” also contains this source archive, so extract the inner archive before running the commands.
+Download **[CoSER-source.zip](CoSER-source.zip)** and **[CoSER-dependencies.zip](CoSER-dependencies.zip)** and extract both into the same directory. Together they contain the full named source tree, pinned upstream dependency sources and the tools described below. The accompanying `SHA256SUMS` identifies the archive. GitHub's automatic “Download ZIP” also contains both archives, so extract both inner archives before running the commands.
 
 ```sh
 unzip CoSER-source.zip
+unzip CoSER-dependencies.zip
 cd CoSER
 python3 tools/verify.py
 python3 tools/summarize_results.py --output output/measurements.json
@@ -25,7 +26,21 @@ python3 tools/build_native.py --work "$HOME/coser-build" --jobs 2 --target all
 python3 tools/test_native.py --work "$HOME/coser-build" --output "$HOME/coser-build/public"
 ```
 
-This builds four CoSER native entries from source and runs a two-party public correctness suite against the freshly built libraries. Build commands and diagnostics are saved automatically. Trained-model and external-framework reproduction are separate sections of the guide.
+This builds the four CoSER Transformer entries and five retrieval/ablation entries from source, then runs a two-party public correctness suite against the freshly built libraries. Build commands and diagnostics are saved automatically. BOLT, the Bazel-based baselines, and trained-model preparation have separate commands in the guide.
+
+## Choose a reproduction route
+
+| Workload | Guide |
+| --- | --- |
+| GPT-2, CoSER and BumbleBee | Full checkpoint, seven-token prompt and eight generated tokens |
+| BERT-base and BERT-large | MRPC token preparation, exact tensor conversion and local model entries |
+| BOLT | Author-provided word-elimination model and its matched reference |
+| CoSER, Panther and Pisces retrieval | Complete FiQA corpus, public index preparation and Top-10 record validation |
+
+All command sequences are in [REPRODUCING.md](REPRODUCING.md). Download links,
+fixed revisions and tensor/record formats are in [DATA.md](DATA.md). The
+[local verification record](LOCAL_REPRODUCTION.md) distinguishes source builds,
+data preparation and executed correctness checks.
 
 ## What is included
 

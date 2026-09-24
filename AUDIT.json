@@ -1,24 +1,41 @@
 {
-  "archive": "CoSER-source.zip",
-  "sha256": "95dfcc87d40b409d80349d97f798a855cd22d988df48b765c69e014804f7a767",
-  "archive_bytes": 22778716,
-  "members": 7382,
-  "source_bindings": 7440,
-  "compiler_manifests": 75,
-  "compiler_non_system_bindings": 10096,
-  "missing_compiler_dependencies": 0,
-  "static_secret_findings": 0,
-  "clean_empty_directory_native_build_targets": [
-    "gpt2_wan",
-    "gpt2_shared_host",
-    "bert_base_wan",
-    "bert_large_entry"
+  "status": "PASS_LOCAL_RELEASE_AUDIT",
+  "archives": {
+    "CoSER-source.zip": {
+      "bytes": 22430245,
+      "sha256": "4ffaefe4a93be067f55043bd80ac1290a07ac0c46d795d38c951b7593ce1a1dc",
+      "members": 6968
+    },
+    "CoSER-dependencies.zip": {
+      "bytes": 9672172,
+      "sha256": "a463ecf343a68addc4d78019221816cb5c2d2975e4a696cfca616dd3c75f86a4",
+      "members": 1307
+    }
+  },
+  "source_bindings": 9040,
+  "files": 8275,
+  "missing_recorded_dependencies": 0,
+  "secret_pattern_findings": 0,
+  "python_syntax_errors": 0,
+  "clean_source_builds": [
+    "four CoSER Transformer entries",
+    "five retrieval/ablation entries",
+    "BOLT",
+    "BumbleBee",
+    "Panther",
+    "final Pisces adapter"
   ],
-  "public_native_cases": 4,
-  "public_integer_words": 11645888,
-  "public_arithmetic": "PASS",
-  "private_or_cloud_experiments_executed": false,
-  "external_frameworks_rebuilt": false,
-  "temporary_native_builds_removed": true,
-  "reproduction_logs_sha256": "73288410a3c67dc36e541bd458e49005cf9cfb22b88d1a22d90f0b0d3dafd107"
+  "executed_correctness": [
+    "11645888 CoSER protocol words",
+    "98304 BOLT boundary values",
+    "252 native BumbleBee MPC words",
+    "complete Top-10 retrieval in CoSER, Panther and Pisces",
+    "six frontend environment checks"
+  ],
+  "full_trained_models_rerun": false,
+  "new_WAN_or_paper_experiments": false,
+  "temporary_linux_roots_removed": true,
+  "cleanup_sha256": "ea610ea4f8001465356e78588be8c7a6f0f869592aa54c12da9b0d5d39d01559",
+  "detailed_reproduction_archive_sha256": "df89f89b0287966910bbb959ea793840c4f7fe3ce3aac8e0fccdb2f72f0bb2ad",
+  "publication_readback_pending": true
 }
