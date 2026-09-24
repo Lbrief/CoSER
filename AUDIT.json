@@ -2,8 +2,8 @@
   "status": "PASS_LOCAL_RELEASE_AUDIT",
   "archives": {
     "CoSER-source.zip": {
-      "bytes": 22430245,
-      "sha256": "4ffaefe4a93be067f55043bd80ac1290a07ac0c46d795d38c951b7593ce1a1dc",
+      "bytes": 22433789,
+      "sha256": "b6bb0ec93c640e2f745065a60e02cd45c688f8f816dbf5bbec9f5c2a8814c532",
       "members": 6968
     },
     "CoSER-dependencies.zip": {
@@ -37,5 +37,15 @@
   "temporary_linux_roots_removed": true,
   "cleanup_sha256": "ea610ea4f8001465356e78588be8c7a6f0f869592aa54c12da9b0d5d39d01559",
   "detailed_reproduction_archive_sha256": "df89f89b0287966910bbb959ea793840c4f7fe3ce3aac8e0fccdb2f72f0bb2ad",
-  "publication_readback_pending": true
+  "publication_readback_pending": true,
+  "documentation_update": {
+    "changed_release_files": [
+      "README.md"
+    ],
+    "executable_source_unchanged": true,
+    "commands_checked": 65,
+    "previous_commit": "2622868b186adef5661dc5dcaec4c59afbd361a5",
+    "new_native_or_model_execution": false,
+    "checks_reused_from_accepted_release": true
+  }
 }
