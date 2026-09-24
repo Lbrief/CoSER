@@ -1,8 +1,39 @@
-# CoSER
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="coser-banner.svg">
+  <img src="coser-banner.gif" width="1200" alt="CoSER — secure retrieval and Transformer inference. A client exchanges protocol messages with a server.">
+</picture>
 
-Source and experiment records for **CoSER**, covering secure retrieval, the correction-protocol ablation, BERT-base, BERT-large, GPT-2, and the client–cloud WAN comparisons in the paper.
+<p align="center">
+  <a href="#quick-start"><strong>Quick start</strong></a> &nbsp; · &nbsp;
+  <a href="REPRODUCING.md">Reproduction guide</a> &nbsp; · &nbsp;
+  <a href="DATA.md">Data sources</a> &nbsp; · &nbsp;
+  <a href="LOCAL_REPRODUCTION.md">Verified checks</a> &nbsp; · &nbsp;
+  <a href="EXPERIMENTS.md">Experiment map</a>
+</p>
 
-This repository preserves the implementations used for the reported results. The shared-host and WAN implementations are kept separately where they differ. It includes native C++ code, Python interfaces, baseline adapters, data preparation, recorded build commands, public arithmetic checks, and the measurements used to produce the tables.
+**CoSER** is a research implementation for secure retrieval and Transformer inference. This repository contains the source and experiment records for FiQA retrieval, the correction-protocol ablation, BERT-base, BERT-large, GPT-2, and the paper's client–cloud WAN comparisons.
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <strong>01 &nbsp; Build from source</strong><br><br>
+      Native C++, Python interfaces, baseline adapters and pinned dependency sources.<br><br>
+      <a href="#quick-start">Start the local build →</a>
+    </td>
+    <td width="33%" valign="top">
+      <strong>02 &nbsp; Check the outputs</strong><br><br>
+      Two-party native protocols checked against independent integer references.<br><br>
+      <a href="LOCAL_REPRODUCTION.md">Read the verification record →</a>
+    </td>
+    <td width="33%" valign="top">
+      <strong>03 &nbsp; Reproduce a workload</strong><br><br>
+      Pinned datasets, checkpoint preparation and commands for each supported workload.<br><br>
+      <a href="#choose-a-reproduction-route">Choose a route →</a>
+    </td>
+  </tr>
+</table>
+
+Shared-host and WAN implementations are kept separately where they differ. Recorded build commands, source hashes, public arithmetic checks and table inputs accompany the code. The banner is illustrative; it does not represent measured protocol timing. A [static banner](coser-banner.svg) is also available.
 
 ## Start here
 

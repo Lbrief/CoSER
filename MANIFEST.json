@@ -18,8 +18,8 @@
       "sha256": "dc4370da766b8d3449f445f6b82f425f1c096dd57bcfe7cacdfa2c91f75f889c"
     },
     "README.md": {
-      "bytes": 15358,
-      "sha256": "e0fd59bddadf6197db3bec9f680a8ec98f37094436585ac4879abdaf3dffb9f5"
+      "bytes": 16820,
+      "sha256": "d1312427c04481e21e7fe793a14ed2b2c1ecc7a5088a31d4b731fd1e15aa9957"
     },
     "REPRODUCING.md": {
       "bytes": 21154,
@@ -12268,6 +12268,14 @@
     "baselines/pisces/wan/main.cpp": {
       "bytes": 16991,
       "sha256": "9742f8b9672f8cd246774bb476e71547c506f376fc8bfa0f41afefca79bca885"
+    },
+    "coser-banner.gif": {
+      "bytes": 195904,
+      "sha256": "81a3de0bd320bc0030e235aca27b6284eae4875ea2b4212095da1fe3dc7e05d9"
+    },
+    "coser-banner.svg": {
+      "bytes": 28006,
+      "sha256": "3d902047942c581ab3e21e62d1c8a6c4fed3aef61451932f982354b68c532a3f"
     },
     "data/fiqa/records/COMMON__COMPARISON.md": {
       "bytes": 4377,
